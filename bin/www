@@ -4,9 +4,12 @@
  * Module dependencies.
  */
 
+var env = 'dev';
 var app = require('../app');
 var debug = require('debug')('vdksupport:server');
-var http = require('http');
+
+var https = require('https');
+var fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
@@ -16,10 +19,15 @@ var port = normalizePort(process.env.PORT || '8456 ');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
 
-var server = http.createServer(app);
+var credentials = {key:
+  key: fs.readFileSync('../certs/videodesk.com.key'),
+  cert: fs.readFileSync('../certs/videodesk.com.crt')
+};
+
+var server = https.createServer(credentials, app);
 
 /**
  * Listen on provided port, on all network interfaces.
