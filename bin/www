@@ -22,9 +22,9 @@ app.set('port', port);
  * Create HTTPS server.
  */
 
-var credentials = {key:
-  key: fs.readFileSync('../certs/videodesk.com.key'),
-  cert: fs.readFileSync('../certs/videodesk.com.crt')
+var credentials = {
+  key: fs.readFileSync(__dirname + '/../certs/videodesk.com.key'),
+  cert: fs.readFileSync(_dirnname + '/../certs/videodesk.com.crt')
 };
 
 var server = https.createServer(credentials, app);
